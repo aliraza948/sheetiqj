@@ -10,4 +10,8 @@
 
 
 
+## 📦 Installation
+
+```bash
+npm install sheetiq
 
