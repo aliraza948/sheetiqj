@@ -26,7 +26,7 @@ const sheet=new SheetIQ({token:"YOUR_BEARER_TOKEN"})
 import {SheetIQ} from "sheetiq"
 const sheet=new SheetIQ({token:"YOUR_BEARER_TOKEN"})
 ```
-## Get Google Sheet
+## Get Google Sheet Data
 ```js
 await sheet.getSheet({id:"1jNPCbbYGT49dlXCeWkAoutazh3Cp2awsJyXnWyAKZ8E",range:"Sheet1"}).then(i=>{
     console.log(i)  // you'll get data 
