@@ -6,6 +6,33 @@ export class SheetIQ {
     constructor(p: SheetIQParam) {
         this.token = p.token
     }
+    /**
+ * Fetches data from a Google Sheet.
+ * 
+ * @param params - An object containing the sheet ID and range
+ * @returns A Promise that resolves to the sheet data
+ * 
+ * @example 
+ * ```ts
+ * await sheet.getSheet({
+ *   id: "1jNPCbbYGT49dlXCeWkAoutazh3Cp2awsJyXnWyAKZ8E",
+ *   range: "Sheet1"
+ * });
+ * ```
+ * @returns [{}]  Array of Object
+ * 
+ * 
+ * @example 
+ * ```ts
+ * await sheet.getSheet({
+ * id: "1jNPCbbYGT49dlXCeWkAoutazh3Cp2awsJyXnWyAKZ8E",
+ * range: "Sheet1",
+ * key:false
+ * 
+ * })
+ * ```
+ * @returns [[]]  2D Array
+ */
     async getSheet(params: SheetIQGetSheet): Promise<string[][]> {
         const { id, key = true, range } = params
         const data = await fetch(`${this.baseUrl}/api/v1/googlesheet/get`, {
@@ -20,6 +47,39 @@ export class SheetIQ {
         return await data.json()
 
     }
+
+/**
+ * Push Data on a Google Sheet.
+ * 
+ * @param params - An object containing the sheet ID and range
+ * @returns A Promise that resolves to the sheet data
+ * 
+ * @example 
+ * It'll append your data at the end of sheet
+ * ```ts
+ * await sheet.getSheet({
+ *   id: "1jNPCbbYGT49dlXCeWkAoutazh3Cp2awsJyXnWyAKZ8E",
+ *   range: "Sheet1",
+ *   type:"append",
+ *   data:[["example@gmail.com"]]
+ * });
+ * ```
+ * @returns `{range}`  
+ * 
+ * 
+ * @example 
+ * It'll update sheet range
+ * 
+ * ```ts
+ * await sheet.getSheet({
+ *   id: "1jNPCbbYGT49dlXCeWkAoutazh3Cp2awsJyXnWyAKZ8E",
+ *   range: "Sheet1",
+ *   type:"update",
+ *   data:[["example@gmail.com"]]
+ * });
+ * ```
+ * @returns `{range}`
+ */
     async updateSheet(params: SheetIQUpdateSheet): Promise<{}> {
         const { id,  range,data } = params
         const datac = await fetch(`${this.baseUrl}/api/v1/googlesheet/get`, {
