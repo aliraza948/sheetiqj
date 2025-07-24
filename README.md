@@ -32,12 +32,12 @@ await sheet.getSheet({id:"1jNPCbbYGT49dlXCeWkAoutazh3Cp2awsJyXnWyAKZ8E",range:"S
     console.log(i)  // you'll get data 
 })
 ```
-## Update Google Sheet
+## Update Google Sheet Data
 ```js
 await sheet.updateSheet({id:'1jNPCbbYGT49dlXCeWkAoutazh3Cp2awsJyXnWyAKZ8E',range:"Sheet1",data:[["example@gmail.com"]],type:"update"})
 ```
 
-## Append Google Sheet
+## Append Google Sheet Data
 ```js
 await sheet.updateSheet({id:'1jNPCbbYGT49dlXCeWkAoutazh3Cp2awsJyXnWyAKZ8E',range:"Sheet1",data:[["example@gmail.com"]],type:"append"})
 ```
