@@ -1,10 +1,15 @@
 import { SheetIQGetSheet, SheetIQParam, SheetIQUpdateSheet } from "./types";
 
 export class SheetIQ {
-    private token: string
+    public token: string
     private baseUrl: string = 'https://docapi.datafetchpro.com'
+    public sheet:string[]=[]
     constructor(p: SheetIQParam) {
         this.token = p.token
+    }
+    checkParameter(){
+        if(!this.token || this.token==undefined) throw Error("Bearer Token not defined")
+        if(this.sheet.length < 2) throw Error("Your sheet array is not fine")
     }
     /**
  * Fetches data from a Google Sheet.
@@ -33,15 +38,16 @@ export class SheetIQ {
  * ```
  * @returns [[]]  2D Array
  */
-    async getSheet(params: SheetIQGetSheet): Promise<string[][]> {
-        const { id, key = true, range } = params
+    async getSheet(params?: SheetIQGetSheet): Promise<string[][]> {
+        this.checkParameter()
+        const { key = true } = params || {}
         const data = await fetch(`${this.baseUrl}/api/v1/googlesheet/get`, {
             method: "POST",
             headers: {
                 Authorization: `Bearer ${this.token}`,
                 "Content-Type": "application/json",
             },
-            body: JSON.stringify({ id, key, range }),
+            body: JSON.stringify({ id:this.sheet[0], key, range:this.sheet[1] }),
         });
         if (data.status != 200) throw Error
         return await data.json()

@@ -5,30 +5,37 @@
   "main": "./dist/index.js",
   "module": "./dist/index.mjs",
   "types": "./dist/index.d.ts",
- "repository": {"url": "https://github.com/aliraza948/sheetiqj"},
+  "type": "module",
+  "repository": {
+    "url": "https://github.com/aliraza948/sheetiqj"
+  },
   "keywords": [
     "googe-sheet",
     "gsheet",
-     "google-sheets",
-  "google-sheets-api",
-  "google-sheets-data",
-  "google-sheets-integration",
-  "google-sheets-client",
-  "google-sheets-update",
-  "google-sheets-fetch",
-  "sheet-data-get",
-  "sheet-data-update",
-  "fetch-google-sheet",
-  "update-google-sheet"
+    "google-sheets",
+    "google-sheets-api",
+    "google-sheets-data",
+    "google-sheets-integration",
+    "google-sheets-client",
+    "google-sheets-update",
+    "google-sheets-fetch",
+    "sheet-data-get",
+    "sheet-data-update",
+    "fetch-google-sheet",
+    "update-google-sheet"
   ],
   "scripts": {
-    "build": "tsup"
+    "build": "tsup",
+    "test": "npx vitest run"
   },
   "author": "",
   "license": "MIT",
   "devDependencies": {
+    "@types/node": "^24.1.0",
+    "dotenv": "^17.2.1",
+    "readline": "^1.3.0",
     "tsup": "^8.5.0",
-    "typescript": "^5.8.3"
+    "typescript": "^5.8.3",
+    "vitest": "^3.2.4"
   }
-  
 }
