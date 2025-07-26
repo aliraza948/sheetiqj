@@ -24,9 +24,23 @@ describe('SheetIQ.getSheet()', async () => {
     expect(Array.isArray(d)).toBe(true)       // It returns a 2D array
   })
 })
+describe('SheetIQ.updateSheet()', async () => {
+    it('Check Update Funciton', async () => {
+     
+      const d=await sheet.getSheet({key:false})
+      const update=await sheet.updateSheet({data:d,type:"update"})
+      expect(typeof update == 'object').toBe(true)   // It should throw error
+  })
+})
 describe('SheetIQ.getSheet()', async () => {
-    it('Throw Eror due to sheet', async () => {
+    it('Throw Eror due to empty sheet', async () => {
     sheet.sheet=[]
+    await expect(sheet.getSheet()).rejects.toThrow('Your sheet array is not fine')      // It should throw error
+  })
+})
+describe('SheetIQ.getSheet()', async () => {
+    it('Throw Eror due to missing sheet name', async () => {
+    sheet.sheet=["fsdf"]
     await expect(sheet.getSheet()).rejects.toThrow('Your sheet array is not fine')      // It should throw error
   })
 })

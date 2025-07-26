@@ -4,6 +4,15 @@ export class SheetIQ {
     public token: string
     private baseUrl: string = 'https://docapi.datafetchpro.com'
     public sheet:string[]=[]
+
+    /**
+     * 
+     * @param p 
+     * ```ts
+     * const sheet=new SheetIQ({token:"YOUR_BEARER_TOKEN"})
+     * sheet.sheet=["SHEET_ID","SHEET_NAME"]
+     * ```
+     */
     constructor(p: SheetIQParam) {
         this.token = p.token
     }
@@ -19,21 +28,15 @@ export class SheetIQ {
  * 
  * @example 
  * ```ts
- * await sheet.getSheet({
- *   id: "1jNPCbbYGT49dlXCeWkAoutazh3Cp2awsJyXnWyAKZ8E",
- *   range: "Sheet1"
- * });
+ * await sheet.getSheet();
  * ```
  * @returns [{}]  Array of Object
  * 
  * 
  * @example 
  * ```ts
- * await sheet.getSheet({
- * id: "1jNPCbbYGT49dlXCeWkAoutazh3Cp2awsJyXnWyAKZ8E",
- * range: "Sheet1",
+ * await sheet.getSheet(
  * key:false
- * 
  * })
  * ```
  * @returns [[]]  2D Array
@@ -64,8 +67,6 @@ export class SheetIQ {
  * It'll append your data at the end of sheet
  * ```ts
  * await sheet.getSheet({
- *   id: "1jNPCbbYGT49dlXCeWkAoutazh3Cp2awsJyXnWyAKZ8E",
- *   range: "Sheet1",
  *   type:"append",
  *   data:[["example@gmail.com"]]
  * });
@@ -78,8 +79,6 @@ export class SheetIQ {
  * 
  * ```ts
  * await sheet.getSheet({
- *   id: "1jNPCbbYGT49dlXCeWkAoutazh3Cp2awsJyXnWyAKZ8E",
- *   range: "Sheet1",
  *   type:"update",
  *   data:[["example@gmail.com"]]
  * });
@@ -87,20 +86,21 @@ export class SheetIQ {
  * @returns `{range}`
  */
     async updateSheet(params: SheetIQUpdateSheet): Promise<{}> {
-        const { id,  range,data,type } = params
+        this.checkParameter()
+        const {data,type } = params
         const datac = await fetch(`${this.baseUrl}/api/v1/googlesheet/get`, {
             method: "POST",
             headers: {
                 Authorization: `Bearer ${this.token}`,
                 "Content-Type": "application/json",
             },
-            body: JSON.stringify({ id,
-                range,
+            body: JSON.stringify({ id:this.sheet[0],
+                range:this.sheet[1],
                 data,
                 type
             }),
         });
-        if (datac.status != 200) throw Error
+        if (datac.status != 200) throw Error(`message: ${JSON.stringify(await datac.json())}`)
         return await datac.json()
     }
 }

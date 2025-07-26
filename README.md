@@ -20,26 +20,28 @@ npm i sheetiq
 ```js
 const {SheetIQ}=require("sheetiq")
 const sheet=new SheetIQ({token:"YOUR_BEARER_TOKEN"})
+sheet.sheet=["SHEET_ID","SHEET_NAME"]
 ```
 ## Initialize  (TypeScript)
 ```ts
 import {SheetIQ} from "sheetiq"
 const sheet=new SheetIQ({token:"YOUR_BEARER_TOKEN"})
+sheet.sheet=["SHEET_ID","SHEET_NAME"]
 ```
 ## Get Google Sheet Data
 ```js
-await sheet.getSheet({id:"1jNPCbbYGT49dlXCeWkAoutazh3Cp2awsJyXnWyAKZ8E",range:"Sheet1"}).then(i=>{
+await sheet.getSheet().then(i=>{
     console.log(i)  // you'll get data 
 })
 ```
 ## Update Google Sheet Data
 ```js
-await sheet.updateSheet({id:'1jNPCbbYGT49dlXCeWkAoutazh3Cp2awsJyXnWyAKZ8E',range:"Sheet1",data:[["example@gmail.com"]],type:"update"})
+await sheet.updateSheet({data:[["example@gmail.com"]],type:"update"})
 ```
 
 ## Append Google Sheet Data
 ```js
-await sheet.updateSheet({id:'1jNPCbbYGT49dlXCeWkAoutazh3Cp2awsJyXnWyAKZ8E',range:"Sheet1",data:[["example@gmail.com"]],type:"append"})
+await sheet.updateSheet({data:[["example@gmail.com"]],type:"append"})
 ```
 
 
