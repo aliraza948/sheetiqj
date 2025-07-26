@@ -30,9 +30,7 @@ sheet.sheet=["SHEET_ID","SHEET_NAME"]
 ```
 ## Get Google Sheet Data
 ```js
-await sheet.getSheet().then(i=>{
-    console.log(i)  // you'll get data 
-})
+const d=await sheet.getSheet() // data of your sheet
 ```
 ## Update Google Sheet Data
 ```js
